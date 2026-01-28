@@ -247,7 +247,7 @@
 		return FALSE
 	return TRUE
 
-// /Switches the welder on
+/// Switches the welder on
 /obj/item/weldingtool/proc/switched_on(mob/user)
 	if(!status)
 		balloon_alert(user, "unsecured!")
@@ -422,3 +422,16 @@
 	if(get_fuel() < max_fuel && nextrefueltick < world.time)
 		nextrefueltick = world.time + 10
 		reagents.add_reagent(/datum/reagent/fuel, 1)
+
+/obj/item/weldingtool/frictiontool
+	name = "friction welding tool"
+	desc = "A welding tool that uses friction to generate heat instead of an open flame, making it safer to use in a vacuum."
+	icon_state = "fricwelder"
+	inhand_icon_state = "fricwelder"
+	space_welding = TRUE
+	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT*1, /datum/material/plasma=SMALL_MATERIAL_AMOUNT*1, /datum/material/titanium=SMALL_MATERIAL_AMOUNT*2, /datum/material/silver=SMALL_MATERIAL_AMOUNT*0.5,)
+	change_icons = FALSE
+	light_range = 1
+	w_class = WEIGHT_CLASS_NORMAL
+	toolspeed = 0.5
+	max_fuel = 80 // still uses fuel to move friction tool, just more efficiently.
