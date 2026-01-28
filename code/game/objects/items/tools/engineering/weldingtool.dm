@@ -1,3 +1,6 @@
+/// Lower limit of required kPa to use regular welding tools
+#define WELD_MIN_PRESSURE 5
+
 /obj/item/weldingtool
 	name = "welding tool"
 	desc = "A standard edition welder provided by Nanotrasen."
@@ -45,6 +48,8 @@
 	var/can_off_process = FALSE
 	/// When fuel was last removed.
 	var/burned_fuel_for = 0
+	/// Whether the welding tool can be used in low pressure or not.
+	var/space_welding = FALSE
 
 	var/activation_sound = 'sound/items/tools/welderactivate.ogg'
 	var/deactivation_sound = 'sound/items/tools/welderdeactivate.ogg'
@@ -217,6 +222,17 @@
 /obj/item/weldingtool/proc/set_welding(new_value)
 	if(welding == new_value)
 		return
+
+	var/turf/T = get_turf(src)
+	if(!T)
+		return
+
+	var/datum/gas_mixture/air = T.return_air()
+	if(new_value && !space_welding && (!air || air.return_pressure() < WELD_MIN_PRESSURE))
+		if(ismob(src.loc))
+			balloon_alert(src.loc, "You can't weld in a vacuum!")
+		return
+
 	. = welding
 	welding = new_value
 	set_light_on(welding)
