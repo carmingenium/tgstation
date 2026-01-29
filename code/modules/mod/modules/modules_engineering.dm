@@ -25,6 +25,41 @@
 	if(istype(head_cover))
 		head_cover.flash_protect = initial(head_cover.flash_protect)
 
+/// Friction Welding - Gives the user a vibration welder in their hand.
+/obj/item/mod/module/friction_welding
+	name = "MOD friction welding module"
+	desc = "A module that allows the user to perform friction welding with ease. \
+		It ejects a high-frequency vibration welder into the user's hand, \
+		enabling it to fuse metals together without the need for heat or filler materials."
+	icon_state = "friction_welding"
+	complexity = 1
+	incompatible_modules = list(/obj/item/mod/module/friction_welding)
+	required_slots = list(ITEM_SLOT_GLOVES)
+
+/obj/item/mod/module/friction_welding/on_use()
+	var/obj/item/weldingtool/frictiontool/welder = new /obj/item/weldingtool/frictiontool
+	if(TRUE) // Check if the user can actually hold the welder.
+		// if user can hold, put the welder in an empty slot
+		return
+	else
+		balloon_alert(activator, "Your hands are full!")
+		qdel(welder)
+		return
+	playsound(src, 'frictionwelderdeploysound', 25, TRUE) // put sound here
+	drain_power(DEFAULT_CHARGE_DRAIN * 2)
+/obj/item/mod/module/friction_welding/on_deactivation(mob/activator, display_message = TRUE, deleting = FALSE)
+	// Remove the welder from the user's hand if they have it
+	for(var/obj/item/weldingtool/frictiontool/welder in activator.get_items_of_type(/obj/item/weldingtool/frictiontool))
+		qdel(welder)
+	playsound(src, 'frictionwelderretractsound', 25, TRUE) // put sound here
+
+/// I might do this aswell
+/obj/item/mod/module/friction_welding/syndicate
+	name = "MODsuit friction welding module"
+	removable = FALSE
+	complexity = 0
+	incompatible_modules = list(/obj/item/mod/module/friction_welding, /obj/item/mod/module/stealth/wraith)
+
 /obj/item/mod/module/welding/syndicate
 	name = "MODsuit flash-protected optical suite"
 	complexity = 0
