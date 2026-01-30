@@ -38,7 +38,7 @@
 
 /obj/item/mod/module/friction_welding/on_use()
 	var/obj/item/weldingtool/frictiontool/welder = new /obj/item/weldingtool/frictiontool
-	if(TRUE) // Check if the user can actually hold the welder.
+	if(src != null) // Check if the user can actually hold the welder.
 		// if user can hold, put the welder in an empty slot
 		return
 	else

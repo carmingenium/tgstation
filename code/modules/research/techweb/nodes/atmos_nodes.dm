@@ -63,6 +63,7 @@
 		"pacman",
 		"mech_generator",
 		"plasmacutter",
+		"frictionwelder",
 		"diode_disk_incendiary",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_2_POINTS)

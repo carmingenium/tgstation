@@ -435,3 +435,6 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	toolspeed = 0.5
 	max_fuel = 80 // still uses fuel to move friction tool, just more efficiently.
+
+/obj/item/weldingtool/frictiontool/empty
+	starting_fuel = FALSE

@@ -51,6 +51,18 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING
 
+/datum/design/frictionwelder
+	name = "Friction Welding Tool"
+	desc = "Friction based welder, capable of welding in low pressure environments."
+	id = "frictionwelder"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT*1, /datum/material/plasma=SMALL_MATERIAL_AMOUNT*1, /datum/material/titanium=SMALL_MATERIAL_AMOUNT*2, /datum/material/silver=SMALL_MATERIAL_AMOUNT*0.5,)
+	build_path = /obj/item/weldingtool/frictiontool/empty
+	category = list(
+		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_ENGINEERING,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SCIENCE
+
 /datum/design/rangedanalyzer
 	name = "Experimental Long-range Gas Analyzer"
 	desc = "An experimental gas analyzer capable of operating at long distance"
